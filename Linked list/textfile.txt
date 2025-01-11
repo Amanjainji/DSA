@@ -1,0 +1,9 @@
+This program reads a file line by line, trims the line of leading and trailing whitespace, 
+and checks if the line is not empty and
+ does not start with a if we're inside a multi-line comment.
+ If we encounter a comment, we set the flag and skip the rest of the line.
+ If we encounter a comment, we reset the flag.
+
+#Note that this program assumes that the file path is a string literal 
+and that the file is in the same directory as the program.
+ You may need to modify the program to handle file paths and errors more robustly.
