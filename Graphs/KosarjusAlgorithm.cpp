@@ -57,8 +57,6 @@ int stronglyConnectedComponents(int v,vector<vector<int>> &edges){
         if(!vis[top]){
             count++;
             dfs(top,vis,transpose);
-
-
         }
     }
     return count;
