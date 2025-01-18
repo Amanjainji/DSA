@@ -24,7 +24,7 @@ int cutIntoSegments(int n,int x,int y ,int z){
     return ans;
 }
 
-//Top-Bottom Approach (Recursion + Memoization)
+//Top-Down Approach (Recursion + Memoization)
 int cutIntoSegmentsMem(int n,int x,int y ,int z,vector<int> &dp){
     //base case
     if(n==0)
