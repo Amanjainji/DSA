@@ -101,7 +101,31 @@ int maxSquareSO(int row,int col,vector<vector<int>> &mat){
     return next[0];
 }
 
+//More Space optimized
+int maxSquareSO2(int row, int col, vector<vector<int>> &mat) {
+    int maxi = 0;
+    vector<int> curr(col + 1, 0); // Store the current row computations
+    int prevDiagonal = 0;        // To track the diagonal value for computation
+
+    for (int i = row - 1; i >= 0; i--) {
+        prevDiagonal = 0; // Reset diagonal for each new row
+        for (int j = col - 1; j >= 0; j--) {
+            int temp = curr[j]; // Store the current cell for diagonal in next iteration
+
+            if (mat[i][j] == 1) {
+                curr[j] = 1 + min({curr[j + 1], curr[j], prevDiagonal});
+                maxi = max(maxi, curr[j]);
+            } else {
+                curr[j] = 0;
+            }
+
+            prevDiagonal = temp; // Update diagonal for the next cell
+        }
+    }
+    return maxi;
+}
+
 int main(){
     vector<vector<int>> mat={{1,1,0},{1,1,0},{1,0,0}};
-    cout<<maxSquareSO(3,3,mat);
+    cout<<maxSquareSO2(3,3,mat);
 }
