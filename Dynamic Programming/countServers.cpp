@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Not a question of DP , just a leetcode question
 int countServers(vector<vector<int>>& grid) {
     vector<pair<int,int>> v;
     for(int i=0;i<grid.size();i++){
