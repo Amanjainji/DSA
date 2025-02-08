@@ -29,141 +29,108 @@ Algo
 3) if previous elements were swapped ,then swapped =1 and interchange both previous to maintain array after swapped
 4)Call for no-swap condn and swap condn
 */
-int solve(vector<int> &nums1, vector<int> &nums2 ,int index, bool swapped){
+int solve(vector<int> &nums1, vector<int> &nums2 ,int i, int p1,int p2){
     //base case
-    if(index==nums1.size())
+    if(i==nums1.size())
         return 0;
     
-    int ans= INT_MAX;
-
-    int prev1= nums1[index-1];
-    int prev2=nums2[index-1];
-
-    //catch
-    if(swapped)   // we are not really swapping in arrays just counting swaps
-        swap(prev1,prev2);
+    int swap= INT_MAX;
+    int noswap=INT_MAX;
+     //swap
+     if(p1<nums2[i] && p2<nums2[i])
+        swap=1+solve(nums1,nums2,i+1,nums1[i],nums2[i]);
     
-    //no swap -  no need of swap already strictly increasing
-    if(nums1[index]>prev1 && nums2[index]>prev2)
-        ans=min(ans,solve(nums1,nums2,index+1,0));
-    
-    //swap
-    if(nums1[index]>prev2 && nums2[index]>prev1)
-        ans=min(ans,1+solve(nums1,nums2,index+1,1));
-
-    return ans;
+     //no swap -  no need of swap already strictly increasing
+    if(p1<nums1[i] && p2<nums2[i])
+        noswap=solve(nums1,nums2,i+1,nums2[i],nums1[i]);
+    return min(swap,noswap);
 }
 
 int minSwap(vector<int>& nums1, vector<int>& nums2) {
-    nums1.insert(nums1.begin(),-1);
-    nums2.insert(nums2.begin(),-1);
-    return solve(nums1,nums2,1,0);
+    return solve(nums1,nums2,0,-1,-1);
 }
 
 //Memoization
-int solveMem(vector<int> &nums1, vector<int> &nums2 ,int index, bool swapped,vector<vector<int>> &dp){
+int solveMem(vector<int> &nums1, vector<int> &nums2 ,int i, int p1,int p2,vector<vector<int>> &dp,bool isswap){
     //base case
-    if(index==nums1.size())
+    if(i==nums1.size())
         return 0;
     
-    int ans= INT_MAX;
-
-    int prev1= nums1[index-1];
-    int prev2=nums2[index-1];
-
-    if(dp[index][swapped]!=-1)
-        return dp[index][swapped];
-
-    //catch
-    if(swapped)   // we are not really swapping in arrays just counting swaps
-        swap(prev1,prev2);
+    int swap= INT_MAX;
+    int noswap=INT_MAX;
+    if(dp[i][isswap]!=-1)
+        return dp[i][isswap];
+     //swap
+    if(p1<nums2[i] && p2<nums1[i])
+        swap=1+solveMem(nums1,nums2,i+1,nums1[i],nums2[i],dp,1);
     
-    //no swap -  no need of swap already strictly increasing
-    if(nums1[index]>prev1 && nums2[index]>prev2)
-        ans=min(ans,solveMem(nums1,nums2,index+1,0,dp));
-    
-    //swap
-    if(nums1[index]>prev2 && nums2[index]>prev1)
-        ans=min(ans,1+solveMem(nums1,nums2,index+1,1,dp));
-
-    return dp[index][swapped]=ans;
+     //no swap -  no need of swap already strictly increasing
+    if(p1<nums1[i] && p2<nums2[i])
+        noswap=solveMem(nums1,nums2,i+1,nums2[i],nums1[i],dp,0);
+    return dp[i][isswap]= min(swap,noswap);
 }
 
 int minSwapMem(vector<int>& nums1, vector<int>& nums2) {
-    nums1.insert(nums1.begin(),-1);
-    nums2.insert(nums2.begin(),-1);
     vector<vector<int>> dp(nums1.size()+1,vector<int>(2,-1));
-    return solveMem(nums1,nums2,1,0,dp);
+    return solveMem(nums1,nums2,0,-1,-1,dp,0);
 }
 
 //Tabulation
 int minSwapTab(vector<int>& nums1, vector<int>& nums2) {
+    nums1.insert(nums1.begin(),-1);
+    nums2.insert(nums2.begin(),-1);
     int n = nums1.size();
-    vector<vector<int>> dp(n+1, vector<int>(2, INT_MAX));
+    vector<vector<int>> dp(n+1, vector<int>(2, 0));
 
-    // Base case: No swaps needed at the last index
-    dp[n-1][0] = 0;
-    dp[n-1][1] = 0;
+    for (int i=n-1; i >= 1; i--) {
+        for (int j= 1; j>=0; j--) {
+            int p1 = nums1[i-1];
+            int p2 = nums2[i-1];
 
-    for (int index = n-2; index >= 0; index--) {
-        for (int swapped = 0; swapped <= 1; swapped++) {
-            int ans = INT_MAX;
-            int prev1 = nums1[index];
-            int prev2 = nums2[index];
+            if(j)
+                swap(p1,p2);
+            //swap
+            int swap=INT_MAX,noswap=INT_MAX;
+            if(p1<nums2[i] && p2<nums1[i])
+                swap=1+dp[i+1][1];
 
-            if (swapped) 
-                swap(prev1, prev2);
+            //no swap -  no need of swap already strictly increasing
+            if(p1<nums1[i] && p2<nums2[i])
+                noswap=dp[i+1][0];
+            dp[i][j]= min(swap,noswap);
 
-            // No swap case
-            if (nums1[index+1] > prev1 && nums2[index+1] > prev2)
-                ans = min(ans, dp[index+1][0]);
-
-            // Swap case
-            if (nums1[index+1] > prev2 && nums2[index+1] > prev1)
-                ans = min(ans, 1 + dp[index+1][1]);
-
-            dp[index][swapped] = ans;
         }
     }
-    return min(dp[0][0], 1+dp[0][1]);
+    return dp[1][0];    //1 bacuse adding of -1 in array
 }
 
-int minSwapSO(vector<int> nums1, vector<int> nums2) {
+int minSwapSO(vector<int>& nums1, vector<int>& nums2) {
+    nums1.insert(nums1.begin(),-1);
+    nums2.insert(nums2.begin(),-1);
     int n = nums1.size();
-    int swap=0;
-    int noswap=0;
-    int currswap=0;
-    int currnoswap=0;
+    vector<int> curr(2, 0);
+    vector<int> next(2, 0);
 
-    for (int index = n-1; index >= 1; index--) {
-        for (int swapped = 1; swapped >=0; swapped--) {
-            int ans = INT_MAX;
-            int prev1 = nums1[index-1];
-            int prev2 = nums2[index-1];
+    for (int i=n-1; i >= 1; i--) {
+        for (int j= 1; j>=0; j--) {
+            int p1 = nums1[i-1];
+            int p2 = nums2[i-1];
 
-            if (swapped) {
-                int temp=prev1;
-                prev1=prev2;
-                prev2=temp;
-            }
+            if(j)
+                swap(p1,p2);
+            //swap
+            int swap=INT_MAX,noswap=INT_MAX;
+            if(p1<nums2[i] && p2<nums1[i])
+                swap=1+next[1];
 
-            // No swap case
-            if (nums1[index] > prev1 && nums2[index] > prev2)
-                ans = noswap;
-
-            // Swap case
-            if (nums1[index] > prev2 && nums2[index] > prev1)
-                ans = min(ans, 1 +swap);
-
-            if(swapped)
-                currswap=ans;
-            else
-                currnoswap=ans;
+            //no swap -  no need of swap already strictly increasing
+            if(p1<nums1[i] && p2<nums2[i])
+                noswap=next[0];
+            curr[j]= min(swap,noswap);
         }
-        swap=currswap;
-        noswap=currnoswap;
+        next=curr;
     }
-    return min(swap,noswap);
+    return next[0];    //1 bacuse adding of -1 in array
 }
 
 int main(){
