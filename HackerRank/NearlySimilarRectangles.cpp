@@ -41,6 +41,26 @@ long nearlySimilarRectangles(vector<vector<long>> sides) {
     return ans;
 }
 
+long nearlySimilarRectangles2(vector<vector<long>> sides) {
+    long ans=0;
+    unordered_map<double,long> mpp;
+    for(int i=0;i<sides.size();i++){
+       long long w=sides[i][0];
+       long long h=sides[i][1];
+       double k=(double)w/(double)h;
+       mpp[k]++;
+    }
+    for(auto i:mpp){
+        if(i.second>1){
+            int n=i.second;
+            ans+= n*(n-1)/2;
+        }
+    }
+    return ans;
+}
+
 int main(){
-    vector<vector<long>> sides;
+    vector<vector<long>> sides={{4,8},{15,30},{25,50}};
+    cout<<nearlySimilarRectangles2(sides);
+
 }
