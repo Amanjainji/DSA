@@ -44,7 +44,6 @@ vector<int> shortestPath(vector<vector<int>> &edges,int v,int e,int src,int term
 
     reverse(ans.begin(),ans.end());
     return ans;
-
 }
 
 int main(){
