@@ -20,6 +20,18 @@ int countDistinctWayToClimb(int n){
     return solve(n,0,dp);
 }
 
+//bottom up approach
+int solve2(int n,vector<int> &dp){
+    dp[n]=1;
+    for(int i=n-1;i>=0;i--)
+        dp[i]= dp[i+1] + dp[i+2];
+    return dp[0];
+}
+
+int countDistinctWayToClimb2(int n){
+    vector<int> dp(n+2,0);
+    return solve2(n,dp);
+}
 
 //space optimized
 int climbStairs(int n) {
@@ -39,6 +51,6 @@ int climbStairs(int n) {
 }
 int main(){
     int n=5;
-    cout<<countDistinctWayToClimb(n)<<endl;
-    cout<<climbStairs(n);
+    cout<<countDistinctWayToClimb2(n)<<endl;
+    //cout<<climbStairs(n);
 }
