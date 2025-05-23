@@ -14,7 +14,7 @@ Example 3:
 Input: nums = [1,2]
 Output: [1,2]
 */
-int #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 vector<int> majorityElement(vector<int> v) {
