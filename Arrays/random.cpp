@@ -142,7 +142,7 @@ int myAtoi(string s) {
                 i++;
             }
             if(s[i]=='-'){
-                
+                i++;
             }
             if(s[i]>='0' && s[i]<='9' ){
                 int k=s[i];
