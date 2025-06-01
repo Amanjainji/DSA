@@ -1,5 +1,12 @@
 #include <bits/stdc++.h>
 
+/*
+1)Sort the input array.Make a recursive function that takes the input array ,the current subset,the current index and  a list of list/ vector of vectors to contain the answer.
+
+2)Try to make a subset of size n during the nth recursion call and consider elements from every index while generating the combinations. Only pick up elements that are appearing for the first time during a recursion call to avoid duplicates.
+
+3)Once an element is picked up, move to the next index.The recursion will terminate when the end of array is reached.While returning backtrack by removing the last element that was inserted.
+*/
 using namespace std;
 void printAns(vector < vector < int >> & ans) {
    cout<<"The unique subsets are "<<endl;
