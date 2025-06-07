@@ -2,6 +2,11 @@
 #include<queue>
 using namespace std;
 
+/*
+Input: n = 5, k = 3, arr[][] = [[4, 7, 9, 12, 15], [0, 8, 10, 14, 20], [6, 12, 16, 30, 50]]
+Output: [6, 8]
+Explanation: Smallest range is formed by  number 7 from the first list, 8 from second list and 6 from the third list.
+*/
 class node{
     public:
     int data;
