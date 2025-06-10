@@ -3,6 +3,25 @@
 #include<string>
 #include<vector>
 
+/*
+Given a square matrix mat[][] of size n x n, such that mat[i][j] = 1 means ith person knows jth person, the task is to find the celebrity. A celebrity is a person who is known to all but does not know anyone. Return the index of the celebrity, if there is no celebrity return -1
+
+Note: Follow 0-based indexing and mat[i][i] will always be 1.
+
+nput: mat[][] = [[1, 1, 0], 
+                [0, 1, 0], 
+                [0, 1, 1]]
+Output: 1
+Explanation: 0th and 2nd person both know 1. Therefore, 1 is the celebrity.
+
+Input: mat[][] = [[1, 1], 
+                            [1, 1]]
+Output: -1
+Explanation: The two people at the party both know each other. None of them is a celebrity.
+
+Input: mat[][] = [[1]]
+Output: 0
+*/
 using namespace std;
 
 //brute force approach - O(N^2)
@@ -40,7 +59,7 @@ int celebrityBrute(vector<vector<int>> &M,int n){
 // O(N) approach using stack
 int celebrity(vector<vector<int>> &M,int n){
     stack<int> s;
-    //step 1:push all element in stack
+    //step 1:push all celebrity in stack
     for(int i=0;i<n;i++){
         s.push(i);
     }
