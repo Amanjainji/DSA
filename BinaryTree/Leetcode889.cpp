@@ -32,25 +32,25 @@ struct TreeNode {
      };
 
 TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
-    unordered_map<int,bool> mpp;
+    unordered_map<int,bool> visited;
     unordered_map<int,TreeNode*> node;
     for(int i=1;i<=preorder.size();i++){
-        mpp[i]=false;
+        visited[i]=false;
     }
     unordered_map<int,int> indexPostOrder;
     for(int i=0;i<postorder.size();i++){
         indexPostOrder[postorder[i]]=i;
     }
     TreeNode* root=new TreeNode(preorder[0]);
-    mpp[preorder[0]]=true;
+    visited[preorder[0]]=true;
     node[preorder[0]]=root;
     for(int i=1;i<preorder.size();i++){
         TreeNode* temp=new TreeNode(preorder[i]);
-        mpp[preorder[i]]=true;
+        visited[preorder[i]]=true;
         node[preorder[i]]=temp;
         int index=indexPostOrder[preorder[i]];
         for(int j=index+1;j<postorder.size();j++){
-            if(mpp[postorder[j]]){
+            if(visited[postorder[j]]){
                 if(node[postorder[j]]->left && node[postorder[j]]->right)
                     continue;
                 else{
