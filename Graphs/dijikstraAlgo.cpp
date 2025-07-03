@@ -1,11 +1,4 @@
-#include<iostream>
-#include<vector>
-#include<map>
-#include<unordered_map>
-#include<list>
-#include<set>
-#include<stack>
-#include<limits.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 void printVector(vector<int> arr){
@@ -55,7 +48,7 @@ vector<int> dijikstra(graph g,int n,int src){
 
     dist[src]=0;
     st.insert(make_pair(0,src)); //st =set
-
+    vector<int> parent(n,-1);
     while(!st.empty()){
         //fetch top record
         pair<int,int> top=*(st.begin());   // for *value at begin
@@ -69,6 +62,7 @@ vector<int> dijikstra(graph g,int n,int src){
         //traverse on neighbours
         for(auto neighbour : adj[topNode]){
             if(nodeDistance+neighbour.second < dist[neighbour.first]){
+                parent[neighbour.first]=topNode;
                 auto record=st.find(make_pair(dist[neighbour.first],neighbour.first));  //find to delete previous data 
 
                 //if record found,then erase it
@@ -84,6 +78,21 @@ vector<int> dijikstra(graph g,int n,int src){
             }
         }
     }
+    vector<int> path;
+    int node = n-1;
+
+    // Iterate backwards from destination to source through the parent array.
+    while (parent[node] != -1){
+        path.push_back(node);
+        node = parent[node];
+    }
+    path.push_back(0);
+    reverse(path.begin(), path.end());
+    cout<<"Path from Source to final node: ";
+    for(auto i:path){
+        cout<<i<<" ";
+    }
+    cout<<endl;
     return dist;
 }
 
@@ -110,7 +119,8 @@ int main(){
     //cout<<"\n\nAdjacency list is:"<<endl;
     //g1.printAdjList();
 
-    vector<int> k=dijikstra(g1,4,0);
+    vector<int> k=dijikstra(g1,n1,0);
+    cout<<"Distance vector for all nodes:\n";
     printVector(k);  
     /*
     4 
