@@ -2,8 +2,7 @@
 using namespace std;
 
 
-        void dfs(int row, int col, vector<vector<int>> &vis, vector<vector<int>> &grid, 
-                 vector<pair<int, int>> &shape, int baseRow, int baseCol) {
+        void dfs(int row, int col, vector<vector<int>> &vis, vector<vector<int>> &grid, vector<pair<int, int>> &shape, int baseRow, int baseCol) {
             int n = grid.size();
             int m = grid[0].size();
             vis[row][col] = 1;
@@ -11,7 +10,7 @@ using namespace std;
     
             int delRow[] = {-1, 0, 1, 0};
             int delCol[] = {0, 1, 0, -1};
-    
+            
             for (int i = 0; i < 4; ++i) {
                 int newRow = row + delRow[i];
                 int newCol = col + delCol[i];
@@ -36,6 +35,21 @@ using namespace std;
                         uniqueIslands.insert(shape);
                     }
                 }
-            }
+            }/*
+            for(auto i:uniqueIslands){
+                for(auto j:i){
+                    cout<<j.first<<","<<j.second<<" ";
+                }
+                cout<<endl;
+            }*/
             return uniqueIslands.size();
+        }
+
+        int main(){
+            vector<vector<int>> grid= {{1, 1, 0, 1, 1},
+            {1, 0, 0, 0, 0},
+            {0, 0, 0, 0, 1},
+            {1, 1, 0, 1, 1}};
+            cout<<countDistinctIslands(grid);
+
         }
