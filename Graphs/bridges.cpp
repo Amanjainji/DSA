@@ -22,7 +22,7 @@ void dfs(int node,int parent,int &timer,vector<int> &disc,vector<int> &low,vecto
         }
         else{
            //back edge , already visited and not parent
-           low[node]=min(low[node],disc[nbr]);
+           low[node]=min(low[node],low[nbr]);
         }
     }
 }

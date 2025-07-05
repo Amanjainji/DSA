@@ -21,7 +21,7 @@ void dfs(int node,int parent,int &timer,vector<int> &disc,vector<int> &low,vecto
         }
         else{
            //back edge , already visited and not parent
-           low[node]=min(low[node],disc[nbr]);
+           low[node]=min(low[node],low[nbr]);
         }
     }
 
@@ -58,8 +58,8 @@ vector<int> findArticulationPoints(vector<vector<int>> &edges,int v,int e){
 }
 
 int main(){
-    vector<vector<int>> edges={{0,1},{1,2},{2,0},{0,3},{3,4}};
-    int v=5,e=5;
+    vector<vector<int>> edges={{0,1},{0,2},{2,4},{0,3},{2,5},{4,6},{5,6},{2,3}};
+    int v=7,e=8;
     vector<int> k=findArticulationPoints(edges,v,e);
     for(int i=0;i<v;i++){
         if(k[i]!=0)
