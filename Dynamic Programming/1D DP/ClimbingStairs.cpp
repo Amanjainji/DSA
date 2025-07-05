@@ -10,6 +10,8 @@ int solve(int nStairs,int i,vector<int> &dp){
     if(i>nStairs){
         return 0;
     }
+    if(dp[i]!=-1)
+        return dp[i];
 
     dp[i]= solve(nStairs,i+1,dp) + solve(nStairs,i+2,dp);
     return dp[i];
@@ -35,13 +37,13 @@ int countDistinctWayToClimb2(int n){
 
 //space optimized
 int climbStairs(int n) {
-        if (n <= 3) 
+        if (n <= 2) 
             return n;
 
-        int prev1 = 3;
-        int prev2 = 2;
+        int prev1 = 2;
+        int prev2 = 1;
 
-        for (int i = 3; i < n; i++) {
+        for (int i = 2; i < n; i++) {
             int cur = prev1 + prev2;
             prev2 = prev1;
             prev1 = cur;
@@ -50,7 +52,7 @@ int climbStairs(int n) {
         return prev1; 
 }
 int main(){
-    int n=5;
-    cout<<countDistinctWayToClimb2(n)<<endl;
-    //cout<<climbStairs(n);
+    int n=3;
+    //cout<<countDistinctWayToClimb2(n)<<endl;
+    cout<<climbStairs(n);
 }
