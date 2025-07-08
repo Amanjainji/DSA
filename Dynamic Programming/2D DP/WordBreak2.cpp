@@ -84,9 +84,9 @@ vector<string> wordBreakMem(string s, vector<string>& wordDict) {
 }
 
 int main(){
-    string s = "pineapplepenapple";
-    vector<string> wordDict = {"apple","pen","applepen","pine","pineapple"};
-    vector<string> k=wordBreak(s,wordDict);
+    string s = "catsanddog";
+    vector<string> wordDict = {"cats","and","sand","dog","cat"};
+    vector<string> k=wordBreakMem(s,wordDict);
     for(auto i:k){
         cout<<i<<endl;
     }
