@@ -79,7 +79,6 @@ class Trie{
     void deleteWordUtil(TrieNode* root,string word){
         if(word.length()==0){
             root->isTerminal=false;
-            root=NULL;
             return;
         }
 
@@ -89,7 +88,6 @@ class Trie{
         child=root->children[index];
         
         deleteWordUtil(child,word.substr(1));
-        root=NULL;
     }
     void deleteWord(string word){
         if(search(word))
