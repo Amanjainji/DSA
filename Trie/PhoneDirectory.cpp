@@ -53,7 +53,7 @@ class Trie{
         insertUtil(root,word);
     }
 
-    void printSuggestion(TrieNode* curr,vector<string>&temp ,string prefix){
+void printSuggestion(TrieNode* curr,vector<string>&temp ,string prefix){
     if(curr->isTerminal){
         temp.push_back(prefix);
     }
@@ -92,7 +92,6 @@ class Trie{
             output.push_back(temp);
             temp.clear();
             prev=curr;
-
         }
         return output;
     }
