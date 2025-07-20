@@ -43,7 +43,7 @@ int search(const string &text, const string &pattern) {
 }
 
 int main() {
-    string text = "bikeandCars";
+    string text = "AmanCarsAm";
     string pattern = "Aman";
     cout << search(text, pattern) << endl;
     return 0;
