@@ -3,7 +3,7 @@ using namespace std;
 
 int findMaxIndex(vector<vector<int>>& mat, int n, int m, int col) {
     int maxValue = -1;
-    int index = -1;
+    int index = -1;         //The column is not sorted: upper_bound and lower_bound require sorted sequences. A column in a 2D matrix isn't guaranteed to be sorted.
     for(int i = 0; i < n; i++) {
         if(mat[i][col] > maxValue) {
             maxValue = mat[i][col];
