@@ -58,40 +58,36 @@ private:
             expression.pop_back();
         }
     }
+long eval(const string& s) {
+    long num = 0, lastNum = 0, res = 0;
+    char lastOp = '+';
 
-    long eval(const string& s) {
-        long num = 0, lastNum = 0, res = 0;
-        char lastOp = '+';
-        for (auto ch : s) {
-            if (isdigit(ch)) {
-                num = num*10 + (ch - '0');
-                continue;
+    for (int i = 0; i < s.size(); ++i) {
+        char ch = s[i];
+
+        if (isdigit(ch)) {
+            num = num * 10 + (ch - '0');
+        }
+
+        if (!isdigit(ch) || i == s.size() - 1) {
+            if (lastOp == '+') {
+                res += lastNum;
+                lastNum = num;
+            } else if (lastOp == '-') {
+                res += lastNum;
+                lastNum = -num;
+            } else if (lastOp == '*') {
+                lastNum *= num;
             }
-            processOp(res, lastNum, num, lastOp);
             lastOp = ch;
             num = 0;
         }
-        processOp(res, lastNum, num, lastOp);
-        res += lastNum;
-        return res;
     }
 
-    void processOp(long& res, long& lastNum, long num, char lastOp) {
-        if (lastOp == '+') {
-            res += lastNum;
-            lastNum = num;
-            return;
-        }
-        if (lastOp == '-') {
-            res += lastNum;
-            lastNum = -num;
-            return;
-        }
-        if (lastOp == '*') {
-            lastNum *= num;
-            return;
-        }
-    }
+    res += lastNum;
+    return res;
+}
+
 public:
     // Time: O(n*2^n)
     // Space: O(n)
