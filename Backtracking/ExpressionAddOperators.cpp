@@ -38,8 +38,13 @@ private:
             return;
         }
 
-        // insert digit
+        // Inserting Digits (without operator)
         // prevent leading 0, ...+0, 0...
+        /*
+        Tries to add current digit directly to the expression (to form multi-digit numbers like 23, 123).
+        Prevents leading zeros (like "01" is not valid)
+        isdigit(expression[n - 2]): To check if the character before the '0' is a digit (i.e., we’re currently building a number, like "10", "230", etc.)
+        */
         int n = expression.size();
         if (expression.empty() || expression.back() != '0' || n > 1 && isdigit(expression[n - 2])) {
             expression.push_back(num[index]);
@@ -48,6 +53,11 @@ private:
         }
 
         // try all possible operator
+        /*
+        Only inserts operator if the last character in expression is a digit
+        Tries all 3 operators before current digit
+        After inserting operator, calls backtrack again (same index because digit still needs to be inserted)
+        */
         for (auto op: {'+', '-', '*'}) {
             if (expression.empty() || !isdigit(expression.back())) {
                 continue;
@@ -61,7 +71,10 @@ private:
 long eval(const string& s) {
     long num = 0, lastNum = 0, res = 0;
     char lastOp = '+';
-
+    /*
+    lastNum to store the previous value (affected by *)
+    lastOp to remember which operation to apply next
+    */
     for (int i = 0; i < s.size(); ++i) {
         char ch = s[i];
 
@@ -71,6 +84,9 @@ long eval(const string& s) {
 
         if (!isdigit(ch) || i == s.size() - 1) {
             if (lastOp == '+') {
+                /*
+                Why? Because in res += lastNum, you're delaying addition until after multiplication is resolved (like how 2+3*4 becomes 2+(3*4)).
+                */
                 res += lastNum;
                 lastNum = num;
             } else if (lastOp == '-') {
@@ -78,8 +94,16 @@ long eval(const string& s) {
                 lastNum = -num;
             } else if (lastOp == '*') {
                 lastNum *= num;
+                /*
+                Important part: if the last operation was *, then we multiply lastNum by the current number and don't touch res yet.This handles the precedence of * over + and -. You delay adding lastNum to res until you're done multiplying.
+                */
             }
+            /*
+            Save the current operator for use in the next iteration
+            Reset num to start building the next number
+            */
             lastOp = ch;
+            //You finally add the last computed value (which may already include multiplication) to res
             num = 0;
         }
     }
