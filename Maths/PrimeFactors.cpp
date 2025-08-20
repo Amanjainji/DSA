@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//TC - O(root(N) x log(N))
 vector<int> primeFactors(int n){
     vector<int> ans;
     for(int i=2;i<pow(n,0.5);i++){
