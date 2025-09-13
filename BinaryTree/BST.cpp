@@ -283,6 +283,15 @@ bool twoSum(node* root,int target){
     return false;   
 }
 
+//approach -2 : using DFS
+unordered_set<int> st;
+bool findTarget(node* root, int k) {
+    if (!root) return false;
+    if (st.count(k - root->data)) return true;
+    st.insert(root->data);
+    return findTarget(root->left, k) || findTarget(root->right, k);
+}
+
 //ques 5 - flatten BST into sorted linked list or a right skewed linked list
 node* FlattenBST(node* root){
     vector<int> ans;
