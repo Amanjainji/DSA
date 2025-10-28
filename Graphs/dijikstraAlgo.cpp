@@ -40,9 +40,7 @@ class graph{
 
 vector<int> dijikstra(graph g,int n,int src){
     map<int,list<pair<int,int>>> adj=g.getAdjList();
-    vector<int> dist(n);
-    for(int i=0;i<n;i++)  //Initialize all to infinite value
-        dist[i]=INT_MAX;
+    vector<int> dist(n,1e9);
     
     set<pair<int,int>> st; //int,int = distance, node
 
