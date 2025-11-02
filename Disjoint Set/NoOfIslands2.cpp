@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// User function Template for C++
 class DisjointSet {
     vector<int> rank, parent, size;
 public:
@@ -19,22 +18,6 @@ public:
         if (node == parent[node])
             return node;
         return parent[node] = findUPar(parent[node]);
-    }
-
-    void unionByRank(int u, int v) {
-        int ulp_u = findUPar(u);
-        int ulp_v = findUPar(v);
-        if (ulp_u == ulp_v) return;
-        if (rank[ulp_u] < rank[ulp_v]) {
-            parent[ulp_u] = ulp_v;
-        }
-        else if (rank[ulp_v] < rank[ulp_u]) {
-            parent[ulp_v] = ulp_u;
-        }
-        else {
-            parent[ulp_v] = ulp_u;
-            rank[ulp_u]++;
-        }
     }
 
     void unionBySize(int u, int v) {
@@ -59,8 +42,7 @@ private:
 public:
     vector<int> numOfIslands(int n, int m, vector<vector<int>> &operators) {
         DisjointSet ds(n * m);
-        int vis[n][m];
-        memset(vis, 0, sizeof vis);
+        vector<vector<int>> vis(n,vector<int>(m,0));
         int cnt = 0;
         vector<int> ans;
         for (auto it : operators) {
@@ -72,10 +54,6 @@ public:
             }
             vis[row][col] = 1;
             cnt++;
-            // row - 1, col
-            // row , col + 1
-            // row + 1, col
-            // row, col - 1;
             int dr[] = { -1, 0, 1, 0};
             int dc[] = {0, 1, 0, -1};
             for (int ind = 0; ind < 4; ind++) {
@@ -101,7 +79,6 @@ public:
 
 
 int main() {
-
     int n = 4, m = 5;
     vector<vector<int>> operators = {{0, 0}, {0, 0}, {1, 1}, {1, 0}, {0, 1},
         {0, 3}, {1, 3}, {0, 4}, {3, 2}, {2, 2}, {1, 2}, {0, 2}
