@@ -134,7 +134,7 @@ git clone https://github.com/Amanjainji/DSA.git
 cd DSA
 ```
 
-## ⭐ Support
+## 📫 Support
 
 If this repository helps you:
 
