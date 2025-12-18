@@ -145,7 +145,9 @@ If this repository helps you:
 📢 Share with others
 
 ### Author
+```bash
 Aman Jain
 C++ | DSA | Competitive Programming
+```
 
-Happy Coding!!
+## Happy Coding!!
