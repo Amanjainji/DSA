@@ -129,8 +129,10 @@ Each folder contains **`.cpp` files** related to that topic.
 ---
 
 ### Clone the repository
+```bash
 git clone https://github.com/Amanjainji/DSA.git
 cd DSA
+```
 
 ### ⭐ Support
 
