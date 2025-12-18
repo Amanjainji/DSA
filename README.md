@@ -1,6 +1,6 @@
 # Data Structures & Algorithms (DSA) in C++
 
-This repository contains **topic-wise implementations of Data Structures and Algorithms in C++ , containing all the questions by Love Babbar, Striver A2Z and SDE sheet**.  
+This repository contains **topic-wise implementations of Data Structures and Algorithms in C++ , containing all the questions by Love Babbar, Striver A2Z and SDE sheet with Comments**.  
 It is designed for **learning, interview preparation, and competitive programming practice**.
 
 All codes are written in **standard C++ (C++14 / C++17)** and organized in a **clean folder structure** so that each topic can be studied independently.
@@ -13,40 +13,7 @@ All codes are written in **standard C++ (C++14 / C++17)** and organized in a **c
 - ✅ Clean and readable C++ code
 - ✅ Covers basics to advanced concepts
 - ✅ Useful for interviews and competitive programming
-- ✅ Inspired by popular sheets (Striver, LeetCode, etc.)
-
----
-
-## 📂 Repository Structure
-DSA/
-│
-├── Arrays/
-├── Backtracking/
-├── BinarySearch/
-├── BinaryTree/
-├── Bit_Manipulation/
-├── DP-striver/
-├── Disjoint Set/
-├── Dynamic Programming/
-├── Graphs/
-├── Greedy/
-├── HashMaps/
-├── Heaps and Sort/
-├── Leetcode_practice/
-├── Linked list/
-├── MCM-striver/
-├── Maths/
-├── Recursion/
-├── Stack/
-├── Strings/
-├── Striver-Algos/
-├── Trie/
-├── Vector/
-├── postfix prefix/
-├── queue/
-└── two-pointer & sliding-window/
-
-
+- ✅ Inspired by popular sheets (Striver, LeetCode, Love Babbar etc.)
 Each folder contains **`.cpp` files** related to that topic.
 
 ---
