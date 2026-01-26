@@ -1,40 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 100005;   // size of array (change as needed)
+const int N = 100005;
 int fen[N];
+int a[N];
 
-// Add `add` to index `i`
 void update(int i, int add) {
     while (i < N) {
         fen[i] += add;
-        i += (i & -i);   // move to next responsible index
+        i += (i & -i);
     }
 }
 
-// Returns sum from 1 to i
 int sum(int i) {
     int s = 0;
     while (i > 0) {
         s += fen[i];
-        i -= (i & -i);   // move to parent
+        i -= (i & -i);
     }
     return s;
 }
 
-// Returns sum from l to r
 int rangeSum(int l, int r) {
     return sum(r) - sum(l - 1);
 }
 
 int main() {
-    // Example usage:
-    update(1, 5);
-    update(3, 7);
-    update(5, 2);
+    int n = 5;
+    a[1] = 1;
+    a[2] = 2;
+    a[3] = 3;
+    a[4] = 4;
+    a[5] = 5;
 
-    cout << sum(5) << endl;        // sum from 1 to 5
-    cout << rangeSum(2, 5) << endl; // sum from 2 to 5
+    // Build Fenwick Tree
+    for (int i = 1; i <= n; i++) {
+        update(i, a[i]);
+    }
+
+    cout << sum(5) << endl;        // 15
+    cout << rangeSum(2, 4) << endl; // 9
 
     return 0;
 }
