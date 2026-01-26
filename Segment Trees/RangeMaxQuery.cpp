@@ -2,7 +2,7 @@
 using namespace std;
 
 int a[100005];
-int seg[4 * 100005];
+int seg[4 * 100005];    //always 4n capacity
 
 // Build the segment tree
 void build(int ind, int low, int high) {
@@ -38,6 +38,19 @@ int query(int ind, int low, int high, int l, int r) {
     return max(left, right);
 }
 
+void update(int ind, int low, int high,int i,int val) {
+    if (low == high) {
+        seg[ind] = val;
+        return;
+    }
+
+    int mid = (low + high) / 2;
+    update(2 * ind + 1, low, mid,i,val);
+    update(2 * ind + 2, mid + 1, high,i,val);
+
+    seg[ind] = max(seg[2 * ind + 1], seg[2 * ind + 2]);
+}
+
 int main() {
     int n;
     cin >> n;
@@ -54,6 +67,16 @@ int main() {
         int l, r;
         cin >> l >> r;
         cout << query(0, 0, n - 1, l, r) << endl;
+    }
+
+    //if update query
+    cout<<"No. of updates: ";
+    int updateQ;
+    cin>>updateQ;
+    while(updateQ--){
+        int i,val;  //i = index to update
+        cin>>i>>val;
+        update(0,0,n-1,i,val);
     }
 
     return 0;
