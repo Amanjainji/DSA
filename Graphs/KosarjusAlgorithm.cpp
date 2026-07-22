@@ -43,7 +43,7 @@ int stronglyConnectedComponents(int v,vector<vector<int>> &edges){
     //create a transpose graph
     unordered_map<int,list<int>> transpose;
     for(int i=0;i<v;i++){
-        vis[i]=0;
+        vis[i]=0;      //mark all visited 0
         for(auto nbr: adj[i]){
             transpose[nbr].push_back(i);
         }
