@@ -31,14 +31,13 @@ class SpecialStack{
 
         int curr=s.top();
         s.pop();
-        if(curr<mini){
-            return curr;
+        if (curr < mini) {
+            int actual = mini;
+            mini = 2 * mini - curr;
+            return actual;
         }
-        else{
-            int prevMin=mini;
-            int val =2*mini-curr;
-            mini=val;
-            return prevMin;
+        else {
+            return curr;
         }
     }
 
