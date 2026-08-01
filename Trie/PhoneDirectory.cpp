@@ -53,19 +53,19 @@ class Trie{
         insertUtil(root,word);
     }
 
-void printSuggestion(TrieNode* curr,vector<string>&temp ,string prefix){
-    if(curr->isTerminal){
-        temp.push_back(prefix);
-    }
-
-    for(char ch='a';ch<='z';ch++){
-        TrieNode* next=curr->children[ch-'a'];
-        if(next!=NULL){
-            prefix.push_back(ch);
-            printSuggestion(next,temp,prefix);
-            prefix.pop_back();
+    void printSuggestion(TrieNode* curr,vector<string>&temp ,string prefix){
+        if(curr->isTerminal){
+            temp.push_back(prefix);
         }
-      }
+
+        for(char ch='a';ch<='z';ch++){
+            TrieNode* next=curr->children[ch-'a'];
+            if(next!=NULL){
+                prefix.push_back(ch);
+                printSuggestion(next,temp,prefix);
+                prefix.pop_back();
+            }
+        }
     }
 
     vector<vector<string>> getSuggestion(string str){
