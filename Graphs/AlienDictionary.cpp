@@ -52,6 +52,7 @@ public:
 
 		vector<int> topo = topoSort(K, adj);
 		string ans = "";
+		
 		for (auto it : topo) {
 			ans = ans + char(it + 'a');
 		}
